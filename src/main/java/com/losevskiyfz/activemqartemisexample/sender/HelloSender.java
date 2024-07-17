@@ -24,24 +24,11 @@ public class HelloSender {
         this.jmsTemplate = jmsTemplate;
     }
 
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter = new MappingJackson2HttpMessageConverter();
-    private ObjectMapper objectMapper = jacksonMessageConverter.getObjectMapper();
+    private final MappingJackson2HttpMessageConverter jacksonMessageConverter = new MappingJackson2HttpMessageConverter();
+    private final ObjectMapper objectMapper = jacksonMessageConverter.getObjectMapper();
 
     @Scheduled(fixedRate = 2000)
-    public void sendMessage(){
-
-        HelloWorldMessage message = HelloWorldMessage
-                .builder()
-                .id(UUID.randomUUID())
-                .message("Hello World!")
-                .build();
-
-        jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE, message);
-
-    }
-
-    @Scheduled(fixedRate = 2000)
-    public void sendandReceiveMessage() throws JMSException {
+    public void sendAndReceiveMessage() throws JMSException {
 
         HelloWorldMessage message = HelloWorldMessage
                 .builder()

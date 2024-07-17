@@ -20,19 +20,6 @@ public class HelloMessageListener {
 
     private final JmsTemplate jmsTemplate;
 
-    @JmsListener(destination = JmsConfig.MY_QUEUE)
-    public void listen(@Payload HelloWorldMessage helloWorldMessage,
-                       @Headers MessageHeaders headers, Message message){
-
-        //System.out.println("I Got a Message!!!!!");
-
-        // System.out.println(helloWorldMessage);
-
-
-        // uncomment and view to see retry count in debugger
-        // throw new RuntimeException("foo");
-
-    }
 
     @JmsListener(destination = JmsConfig.MY_SEND_RCV_QUEUE)
     public void listenForHello(@Payload HelloWorldMessage helloWorldMessage,
@@ -43,9 +30,6 @@ public class HelloMessageListener {
                 .id(UUID.randomUUID())
                 .message("World!!")
                 .build();
-
-        //example to use Spring Message type
-        // jmsTemplate.convertAndSend((Destination) springMessage.getHeaders().get("jms_replyTo"), "got it!");
 
         jmsTemplate.convertAndSend(jmsMessage.getJMSReplyTo(), payloadMsg);
 

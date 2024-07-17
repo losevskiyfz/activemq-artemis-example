@@ -9,7 +9,6 @@ public class ActivemqArtemisExampleApplication {
     public static void main(String[] args) {
 
 
-
         SpringApplication.run(ActivemqArtemisExampleApplication.class, args);
     }
 
